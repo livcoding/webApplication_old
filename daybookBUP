@@ -1,0 +1,119 @@
+import { Component, OnInit } from '@angular/core';
+// import * as _moment from 'moment-timezone';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormerrorService } from 'app/commoncomponents/Service/formerror.service';
+import { DaybookService } from './daybook.service';
+import { DatePipe } from '@angular/common';
+import { saveAs } from 'file-saver';
+
+// const moment = _moment;
+// const TIME_ZONE = 'Asia/Kolkata';
+
+@Component({
+  selector: 'app-daybook',
+  templateUrl: './daybook.component.html',
+  styleUrls: ['./daybook.component.css']
+})
+
+
+export class DaybookComponent   implements OnInit {
+  chexBox: any[];
+  dayBook: FormGroup;
+  formErrors: any;
+  voucherTypeData: any[];
+  voucherData: any[] = new Array();
+  daybooklist: any[];
+  allerror: any;
+  
+
+  constructor( private fb: FormBuilder,
+    private errSvc: FormerrorService,
+    public datepipe: DatePipe,
+    private dayBookService: DaybookService
+) {
+  this.formErrors = {
+      
+    fromDate: {},
+    toDate: {}
+  
+
+ };
+}
+  ngOnInit(): void {
+    this.errSvc.getjson().subscribe(data => {
+      this.allerror = data;
+    });
+    this.dayBook=new FormGroup({
+      fromDate: new FormControl(null),
+      toDate: new FormControl(null),
+     
+
+      downloadType: new FormControl(null),
+      //  fromDate: [new FormControl(moment().tz(TIME_ZONE)), [Validators.required]],
+      //  toDate: [new FormControl(moment().tz(TIME_ZONE)), [Validators.required]],
+       
+     });
+     this.daybooklist=[];
+     //get voucher
+     
+      
+  }
+  getVoucherType(): void
+  {
+  this.dayBookService.getDayBookReportType().subscribe(
+    data => {
+    
+      this.voucherTypeData = data.response.vouchertypes;
+      
+    });
+  }
+  costCentreClick(item: any, status: any): void {
+    
+    if (status === 'on') {
+      this.voucherData.push(item);
+    } else {
+      this.voucherData = this.voucherData.filter(a => a.vouchertypeid !== item.vouchertypeid);
+     }
+
+    //console.log(this.voucherData);
+  }
+
+getReport(){
+  
+  const voucherArr = new Array();
+  this.voucherData.forEach(obj =>{
+    const newObj = {
+      vouchertypeid: obj.vouchertypeid,
+    }
+    voucherArr.push(newObj);
+  });
+
+  const dto = {
+    'profitcentreid': 'PCID1908A0000001',
+    //'profitcentreid': localStorage.getItem('profitcentereid'),       
+    'fromdate': this.datepipe.transform(this.dayBook.value.fromDate.toDate(), 'dd/MM/yyyy'),
+    'todate': this.datepipe.transform(this.dayBook.value.toDate.toDate(), 'dd/MM/yyyy'),
+    'vouchertypeidlist': voucherArr,
+
+  }
+  console.log(voucherArr);
+  console.log(this.voucherData);
+  console.log(this.datepipe.transform(this.dayBook.value.fromDate.toDate(), 'dd/MM/yyyy'));
+  
+  
+  this.dayBookService.getDayBookReport(dto).subscribe(info => {
+    const mediaType = 'application/pdf';
+    const blob = new Blob([info], { type: mediaType });
+    saveAs(blob, 'report.pdf');
+    // this.clearForm();
+  }, error => {
+    // if (error.status === 0) {
+    //   this.showError(this.allerror.SERVER_NOT_FOUND, '');
+    // } else {
+    //   this.showError(error.error.response.status, '');
+     }); 
+}
+
+
+  
+}

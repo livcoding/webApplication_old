@@ -1,0 +1,55 @@
+1. Native English Speaker and My English..!
+2. Are you healthy?? tips for health!!!
+3. Designe Patterns - Patterns by Gang of Four
+4. The SDLC: 7 phases, popular models, benefits & more
+5. English Grammar Lesson - All About Tenses
+6. English Grammar Lesson - Parts of Speech
+7. English Dictionary - Learn Frequently used Vocabulary(Most frequently used vocabulary words by Nouns, Verbs, Adjectives, Pronouns, Adverbs, & Prepositions.)
+8. 
+
+https://www.talkenglish.com/vocabulary/english-vocabulary.aspx
+https://raygun.com/blog/software-development-life-cycle/
+https://howtodoinjava.com/gang-of-four-java-design-patterns/
+Designe Patterns - Patterns by Gang of Four 
+
+The idea of DP was 4 people name
+1.Erich Gama
+2.John Vlissides
+3.Ralph Johnson
+4.Richard Helm
+
+In 1959 they published Designe Patterns: Elements of Reusable Object-Oriented Software.
+The book featured 23 patterns solving various problems of object oriented designe. in short people calls GoF book.
+
+1. Creational Patterns
+  1.Abstract Factory:	Creates an instance of several families of classes
+  2.Builder:	        Separates object construction from its representation
+  3.Factory Method:	Creates an instance of several derived classes
+  4.Prototype:	        A fully initialized instance to be copied or cloned
+  5.Singleton:	        A class of which only a single instance can exist
+
+2. Structural Patterns
+  6.Adapter:	Match interfaces of different classes
+  7.Bridge:	Separates an object’s interface from its implementation
+  8.Composite:	A tree structure of simple and composite objects
+  9.Decorator:	Add responsibilities to objects dynamically
+  10.Facade:	A single class that represents an entire subsystem
+  11.Flyweight:	A fine-grained instance used for efficient sharing
+  12.Proxy:	An object representing another object
+
+3. Behavioral Patterns
+  13.Chain of Resp. :	A way of passing a request between a chain of objects
+  14.Command:    	Encapsulate a command request as an object
+  15.Interpreter:	A way to include language elements in a program
+  16.Iterator:   	Sequentially access the elements of a collection
+  17.Mediator:  	Defines simplified communication between classes
+  18.Memento:   	Capture and restore an object's internal state
+  19.Observer:  	A way of notifying change to a number of classes
+  20.State:     	Alter an object's behavior when its state changes
+  21.Strategy:  	Encapsulates an algorithm inside a class
+  22.Template Method: 	Defer the exact steps of an algorithm to a subclass
+  23.Visitor:   	Defines a new operation to a class without change
+
+Now we will look with UML and sample code to understand the concept in brief...
+
+ 
